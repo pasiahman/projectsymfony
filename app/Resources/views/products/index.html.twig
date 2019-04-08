@@ -9,6 +9,7 @@
                 <th>Id</th>
                 <th>Productname</th>
                 <th>Productcode</th>
+                <th>Slug</th>
                 <th>Price</th>
                 <th>Stock</th>
                 <th>Description</th>
@@ -22,6 +23,7 @@
                 <td><a href="{{ path('products_show', { 'id': product.id }) }}">{{ product.id }}</a></td>
                 <td>{{ product.productName }}</td>
                 <td>{{ product.productCode }}</td>
+                <td>{{ product.slug }}</td>
                 <td>{{ product.price }}</td>
                 <td>{{ product.stock }}</td>
                 <td>{{ product.description }}</td>

@@ -13,6 +13,16 @@ use Doctrine\ORM\Mapping as ORM;
 class Category
 {
     /**
+     * @ORM\OneToMany(targetEntity="ProductBundle\Entity\Products", mappedBy="category")
+     */
+    private $products;
+
+    public function __construct()
+    {
+        $this->products = new ArrayCollection();
+    }
+
+    /**
      * @var int
      *
      * @ORM\Column(name="id", type="integer")
@@ -79,6 +89,10 @@ class Category
         $this->name = $name;
 
         return $this;
+    }
+
+    public function __toString() {
+        return $this->name;
     }
 
     /**
@@ -186,5 +200,38 @@ class Category
     {
         return $this->dateUpd;
     }
-}
 
+    /**
+     * Add product
+     *
+     * @param \ProductBundle\Entity\Products $product
+     *
+     * @return Category
+     */
+    public function addProduct(\ProductBundle\Entity\Products $product)
+    {
+        $this->products[] = $product;
+
+        return $this;
+    }
+
+    /**
+     * Remove product
+     *
+     * @param \ProductBundle\Entity\Products $product
+     */
+    public function removeProduct(\ProductBundle\Entity\Products $product)
+    {
+        $this->products->removeElement($product);
+    }
+
+    /**
+     * Get products
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getProducts()
+    {
+        return $this->products;
+    }
+}

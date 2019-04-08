@@ -1,3 +1,7 @@
+product_products:
+    resource: "@ProductBundle/Controller/ProductsController.php"
+    type:     annotation
+
 address:
     resource: "@AddressBundle/Controller/"
     type:     annotation

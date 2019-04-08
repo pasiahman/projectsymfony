@@ -12,6 +12,17 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Address
 {
+
+    public function __construct() {
+        $this->cart = new ArrayCollection();
+    }
+    
+    /**
+     * One address has many cart. This is the inverse side.
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Cart", mappedBy="address")
+     */
+    private $cart;
+
     /**
      * @var int
      *
@@ -36,11 +47,11 @@ class Address
     private $state;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="id_user", type="integer")
+     * Many address have one user. This is the owning side.
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="address")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
-    private $idUser;
+    private $user;
 
     /**
      * @var string
@@ -372,5 +383,62 @@ class Address
     {
         return $this->dateUpd;
     }
-}
 
+    /**
+     * Set user
+     *
+     * @param \AppBundle\Entity\User $user
+     *
+     * @return Address
+     */
+    public function setUser(\AppBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \AppBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Add cart
+     *
+     * @param \AppBundle\Entity\Cart $cart
+     *
+     * @return Address
+     */
+    public function addCart(\AppBundle\Entity\Cart $cart)
+    {
+        $this->cart[] = $cart;
+
+        return $this;
+    }
+
+    /**
+     * Remove cart
+     *
+     * @param \AppBundle\Entity\Cart $cart
+     */
+    public function removeCart(\AppBundle\Entity\Cart $cart)
+    {
+        $this->cart->removeElement($cart);
+    }
+
+    /**
+     * Get cart
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCart()
+    {
+        return $this->cart;
+    }
+}

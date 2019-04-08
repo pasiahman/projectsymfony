@@ -22,18 +22,18 @@ class Cart
     private $id;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="id_address", type="integer")
+     * Many cart have one address. This is the owning side.
+     * @ORM\ManyToOne(targetEntity="AddressBundle\Entity\Address", inversedBy="cart")
+     * @ORM\JoinColumn(name="address_id", referencedColumnName="id")
      */
-    private $idAddress;
+    private $address;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="id_user", type="integer")
+     * Many cart have one user. This is the owning side.
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="cart")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
-    private $idUser;
+    private $user;
 
     /**
      * @var bool
@@ -186,5 +186,52 @@ class Cart
     {
         return $this->dateUpd;
     }
-}
 
+    /**
+     * Set address
+     *
+     * @param \AddressBundle\Entity\Address $address
+     *
+     * @return Cart
+     */
+    public function setAddress(\AddressBundle\Entity\Address $address = null)
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    /**
+     * Get address
+     *
+     * @return \AddressBundle\Entity\Address
+     */
+    public function getAddress()
+    {
+        return $this->address;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \AppBundle\Entity\User $user
+     *
+     * @return Cart
+     */
+    public function setUser(\AppBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \AppBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+}

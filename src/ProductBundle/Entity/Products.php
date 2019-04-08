@@ -29,11 +29,10 @@ class Products
     private $productName;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="id_category", type="integer")
+     * @ORM\ManyToOne(targetEntity="CategoryBundle\Entity\Category", inversedBy="products")
+     * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
      */
-    private $idCategory;
+    private $category;
 
     /**
      * @var string
@@ -41,6 +40,13 @@ class Products
      * @ORM\Column(name="product_code", type="string", length=255)
      */
     private $productCode;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="slug", type="string", length=255)
+     */
+    private $slug;
 
     /**
      * @var int
@@ -224,5 +230,76 @@ class Products
     {
         return $this->active;
     }
-}
 
+    /**
+     * Set idCategory
+     *
+     * @param integer $idCategory
+     *
+     * @return Products
+     */
+    public function setIdCategory($idCategory)
+    {
+        $this->idCategory = $idCategory;
+
+        return $this;
+    }
+
+    /**
+     * Get idCategory
+     *
+     * @return integer
+     */
+    public function getIdCategory()
+    {
+        return $this->idCategory;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     *
+     * @return Products
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * Set category
+     *
+     * @param \CategoryBundle\Entity\Category $category
+     *
+     * @return Products
+     */
+    public function setCategory(\CategoryBundle\Entity\Category $category = null)
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * Get category
+     *
+     * @return \CategoryBundle\Entity\Category
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+}
