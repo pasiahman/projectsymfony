@@ -1,0 +1,24 @@
+address:
+    resource: "@AddressBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+category:
+    resource: "@CategoryBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+product_products:
+    resource: "@ProductBundle/Controller/ProductsController.php"
+    type:     annotation
+
+product:
+    resource: "@ProductBundle/Resources/config/routing.php"
+    prefix:   /
+
+app:
+    resource: '@AppBundle/Controller/'
+    type: annotation
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"

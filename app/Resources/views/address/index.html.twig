@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Addresses list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Country</th>
+                <th>State</th>
+                <th>Iduser</th>
+                <th>Alias</th>
+                <th>Nameaccount</th>
+                <th>Address</th>
+                <th>Postcode</th>
+                <th>City</th>
+                <th>Phone</th>
+                <th>Dateadd</th>
+                <th>Dateupd</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for address in addresses %}
+            <tr>
+                <td><a href="{{ path('address_show', { 'id': address.id }) }}">{{ address.id }}</a></td>
+                <td>{{ address.country }}</td>
+                <td>{{ address.state }}</td>
+                <td>{{ address.idUser }}</td>
+                <td>{{ address.alias }}</td>
+                <td>{{ address.nameAccount }}</td>
+                <td>{{ address.address }}</td>
+                <td>{{ address.postcode }}</td>
+                <td>{{ address.city }}</td>
+                <td>{{ address.phone }}</td>
+                <td>{% if address.dateAdd %}{{ address.dateAdd|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if address.dateUpd %}{{ address.dateUpd|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('address_show', { 'id': address.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('address_edit', { 'id': address.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('address_new') }}">Create a new address</a>
+        </li>
+    </ul>
+{% endblock %}

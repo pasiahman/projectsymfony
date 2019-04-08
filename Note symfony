@@ -1,0 +1,31 @@
+php app/console doctrine:schema:update --force --complete
+    Schema update
+php app/console doctrine:schema:validate
+    validate schema
+php app/console debug:router
+    route list
+php app/console doctrine:schema:update --dump-sql
+    sql validate dump to sql
+php app/console doctrine:generate:entity
+    generate entity
+php app/console doctrine:database:create
+    generate database
+php app/console server:run 127.0.0.1:8008
+    run app
+php app/console generate:bundle
+    generate bundle
+php app/console doctrine:schema:create
+    create schema
+php app/console doctrine:generate:crud
+    generate crud
+
+php app/console fos:user:create testuser test@example.com p@ssword - add user
+php app/console fos:user:create testuser - manual add
+php app/console fos:user:create adminuser --super-admin
+php app/console fos:user:promote testuser ROLE_ADMIN
+php app/console fos:user:promote testuser --super
+php app/console fos:user:demote testuser ROLE_ADMIN
+php app/console fos:user:demote testuser --super
+php app/console fos:user:change-password testuser newp@ssword
+
+php app/console doctrine:generate:entities AppBundle:Contact
