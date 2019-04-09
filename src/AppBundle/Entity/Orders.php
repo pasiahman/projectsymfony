@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Orders
@@ -12,6 +13,17 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Orders
 {
+    public function __construct()
+    {
+        $this->orderDetails = new ArrayCollection();
+    }
+
+    /**
+     * One order has many orderDetail. This is the inverse side.
+     * @ORM\OneToMany(targetEntity="OrderDetails", mappedBy="order")
+     */
+    private $orderDetails;
+
     /**
      * @var int
      *
@@ -29,18 +41,18 @@ class Orders
     private $refrence;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="id_user", type="integer")
+     * Many order have one address. This is the owning side.
+     * @ORM\ManyToOne(targetEntity="AddressBundle\Entity\Address", inversedBy="order")
+     * @ORM\JoinColumn(name="address_id", referencedColumnName="id")
      */
-    private $idUser;
+    private $address;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="id_address", type="integer")
+     * Many order have one user. This is the owning side.
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="order")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
-    private $idAddress;
+    private $user;
 
     /**
      * @var string

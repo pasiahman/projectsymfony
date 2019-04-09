@@ -22,18 +22,18 @@ class OrderDetails
     private $id;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="id_order", type="integer")
+     * Many orderDetail have one order. This is the owning side.
+     * @ORM\ManyToOne(targetEntity="Orders", inversedBy="orderDetails")
+     * @ORM\JoinColumn(name="order_id", referencedColumnName="id")
      */
-    private $idOrder;
+    private $order;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="id_product", type="integer")
+     * Many orderDetail have one product. This is the owning side.
+     * @ORM\ManyToOne(targetEntity="ProductBundle\Entity\Products", inversedBy="productOrder")
+     * @ORM\JoinColumn(name="product_id", referencedColumnName="id")
      */
-    private $idProduct;
+    private $product;
 
     /**
      * @var string

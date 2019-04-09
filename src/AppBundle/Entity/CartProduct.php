@@ -22,18 +22,18 @@ class CartProduct
     private $id;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="id_cart", type="integer")
+     * Many cartProduct have one cart. This is the owning side.
+     * @ORM\ManyToOne(targetEntity="Cart", inversedBy="cartProduct")
+     * @ORM\JoinColumn(name="cart_id", referencedColumnName="id")
      */
-    private $idCart;
+    private $cart;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="id_product", type="integer")
+     * Many cartProduct have one product. This is the owning side.
+     * @ORM\ManyToOne(targetEntity="ProductBundle\Entity\Products", inversedBy="productCart")
+     * @ORM\JoinColumn(name="product_id", referencedColumnName="id")
      */
-    private $idProduct;
+    private $product;
 
     /**
      * @var int

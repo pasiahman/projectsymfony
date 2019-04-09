@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity
@@ -24,6 +25,7 @@ class User extends BaseUser
         parent::__construct();
         $this->address = new ArrayCollection();
         $this->cart = new ArrayCollection();
+        $this->order = new ArrayCollection();
     }
 
     /**
@@ -31,6 +33,12 @@ class User extends BaseUser
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Cart", mappedBy="user")
      */
     private $cart;
+
+    /**
+     * One user has many order. This is the inverse side.
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Orders", mappedBy="user")
+     */
+    private $order;
 
     /**
      * One user has many address. This is the inverse side.

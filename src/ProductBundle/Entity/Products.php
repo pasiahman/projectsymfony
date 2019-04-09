@@ -3,6 +3,7 @@
 namespace ProductBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Products
@@ -12,6 +13,24 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Products
 {
+    public function __construct()
+    {
+        $this->productCart = new ArrayCollection();
+        $this->productOrder = new ArrayCollection();
+    }
+
+    /**
+     * One product has many productCart. This is the inverse side.
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\CartProduct", mappedBy="product")
+     */
+    private $productCart;
+
+    /**
+     * One product has many orderDetails. This is the inverse side.
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\OrderDetails", mappedBy="product")
+     */
+    private $productOrder;
+
     /**
      * @var int
      *

@@ -3,6 +3,7 @@
 namespace AddressBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Address
@@ -15,6 +16,7 @@ class Address
 
     public function __construct() {
         $this->cart = new ArrayCollection();
+        $this->order = new ArrayCollection();
     }
     
     /**
@@ -22,6 +24,12 @@ class Address
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Cart", mappedBy="address")
      */
     private $cart;
+
+    /**
+     * One address has many order. This is the inverse side.
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Orders", mappedBy="address")
+     */
+    private $order;
 
     /**
      * @var int

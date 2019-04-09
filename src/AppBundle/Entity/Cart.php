@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Cart
@@ -12,6 +13,11 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Cart
 {
+    public function __construct()
+    {
+        $this->cartProduct = new ArrayCollection();
+    }
+
     /**
      * @var int
      *
@@ -34,6 +40,12 @@ class Cart
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $user;
+
+    /**
+     * One cart has many cartProduct. This is the inverse side.
+     * @ORM\OneToMany(targetEntity="CartProduct", mappedBy="cart")
+     */
+    private $cartProduct;
 
     /**
      * @var bool
