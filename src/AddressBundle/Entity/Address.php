@@ -117,11 +117,10 @@ class Address
      */
     private $dateUpd;
 
-
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -174,30 +173,6 @@ class Address
     public function getState()
     {
         return $this->state;
-    }
-
-    /**
-     * Set idUser
-     *
-     * @param integer $idUser
-     *
-     * @return Address
-     */
-    public function setIdUser($idUser)
-    {
-        $this->idUser = $idUser;
-
-        return $this;
-    }
-
-    /**
-     * Get idUser
-     *
-     * @return int
-     */
-    public function getIdUser()
-    {
-        return $this->idUser;
     }
 
     /**
@@ -393,30 +368,6 @@ class Address
     }
 
     /**
-     * Set user
-     *
-     * @param \AppBundle\Entity\User $user
-     *
-     * @return Address
-     */
-    public function setUser(\AppBundle\Entity\User $user = null)
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
-    /**
-     * Get user
-     *
-     * @return \AppBundle\Entity\User
-     */
-    public function getUser()
-    {
-        return $this->user;
-    }
-
-    /**
      * Add cart
      *
      * @param \AppBundle\Entity\Cart $cart
@@ -448,5 +399,63 @@ class Address
     public function getCart()
     {
         return $this->cart;
+    }
+
+    /**
+     * Add order
+     *
+     * @param \AppBundle\Entity\Orders $order
+     *
+     * @return Address
+     */
+    public function addOrder(\AppBundle\Entity\Orders $order)
+    {
+        $this->order[] = $order;
+
+        return $this;
+    }
+
+    /**
+     * Remove order
+     *
+     * @param \AppBundle\Entity\Orders $order
+     */
+    public function removeOrder(\AppBundle\Entity\Orders $order)
+    {
+        $this->order->removeElement($order);
+    }
+
+    /**
+     * Get order
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getOrder()
+    {
+        return $this->order;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \AppBundle\Entity\User $user
+     *
+     * @return Address
+     */
+    public function setUser(\AppBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \AppBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

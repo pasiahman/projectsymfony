@@ -246,4 +246,33 @@ class Cart
     {
         return $this->user;
     }
+
+    public function getCartProduct()
+    {
+        return $this->cartProduct;
+    }
+
+    /**
+     * Add cartProduct
+     *
+     * @param \AppBundle\Entity\CartProduct $cartProduct
+     *
+     * @return Cart
+     */
+    public function addCartProduct(\AppBundle\Entity\CartProduct $cartProduct)
+    {
+        $this->cartProduct[] = $cartProduct;
+
+        return $this;
+    }
+
+    /**
+     * Remove cartProduct
+     *
+     * @param \AppBundle\Entity\CartProduct $cartProduct
+     */
+    public function removeCartProduct(\AppBundle\Entity\CartProduct $cartProduct)
+    {
+        $this->cartProduct->removeElement($cartProduct);
+    }
 }

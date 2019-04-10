@@ -186,5 +186,52 @@ class CartProduct
     {
         return $this->dateUpd;
     }
-}
 
+    /**
+     * Set cart
+     *
+     * @param \AppBundle\Entity\Cart $cart
+     *
+     * @return CartProduct
+     */
+    public function setCart(\AppBundle\Entity\Cart $cart = null)
+    {
+        $this->cart = $cart;
+
+        return $this;
+    }
+
+    /**
+     * Get cart
+     *
+     * @return \AppBundle\Entity\Cart
+     */
+    public function getCart()
+    {
+        return $this->cart;
+    }
+
+    /**
+     * Set product
+     *
+     * @param \ProductBundle\Entity\Products $product
+     *
+     * @return CartProduct
+     */
+    public function setProduct(\ProductBundle\Entity\Products $product = null)
+    {
+        $this->product = $product;
+
+        return $this;
+    }
+
+    /**
+     * Get product
+     *
+     * @return \ProductBundle\Entity\Products
+     */
+    public function getProduct()
+    {
+        return $this->product;
+    }
+}

@@ -15,10 +15,14 @@ class DefaultController extends Controller
     public function indexAction(Request $request)
     {
         $repository = $this->getDoctrine()->getRepository(Products::class);
-        $products = $repository->findAll();
-dump($products);die();
+        $products = $repository->findBy(
+            array('active' => 1)
+        );
+
+        $cart_add = $this->generateUrl('cart_add');
         return $this->render('default/index.html.twig', array(
             'products' => $products,
+            'cart_add' => $cart_add,
         ));
     }
 }

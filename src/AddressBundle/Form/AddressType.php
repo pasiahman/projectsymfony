@@ -13,7 +13,16 @@ class AddressType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('country')->add('state')->add('idUser')->add('alias')->add('nameAccount')->add('address')->add('postcode')->add('city')->add('phone')->add('dateAdd')->add('dateUpd');
+        $builder
+        ->add('alias')
+        ->add('nameAccount')
+        ->add('address')
+        ->add('country')
+        ->add('state')
+        ->add('city')
+        ->add('postcode')
+        ->add('phone')
+        ->add('user');
     }/**
      * {@inheritdoc}
      */

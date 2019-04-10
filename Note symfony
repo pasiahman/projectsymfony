@@ -31,3 +31,4 @@ php app/console fos:user:change-password testuser newp@ssword
 php app/console doctrine:generate:entities AppBundle:Contact
 
 php app/console doctrine:schema:update --force
+

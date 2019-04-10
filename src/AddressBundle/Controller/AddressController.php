@@ -43,6 +43,9 @@ class AddressController extends Controller
         $form = $this->createForm('AddressBundle\Form\AddressType', $address);
         $form->handleRequest($request);
 
+        $address->setDateAdd(new \DateTime());
+        $address->setDateUpd(new \DateTime());
+
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($address);
@@ -86,6 +89,9 @@ class AddressController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $address->setDateAdd(new \DateTime($address->getDateAdd()->format('Y-m-d H:i:s')));
+            $address->setDateUpd(new \DateTime());
+            
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('address_edit', array('id' => $address->getId()));
