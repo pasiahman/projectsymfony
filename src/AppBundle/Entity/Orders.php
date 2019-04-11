@@ -19,12 +19,6 @@ class Orders
     }
 
     /**
-     * One order has many orderDetail. This is the inverse side.
-     * @ORM\OneToMany(targetEntity="OrderDetails", mappedBy="order")
-     */
-    private $orderDetails;
-
-    /**
      * @var int
      *
      * @ORM\Column(name="id", type="integer")
@@ -76,6 +70,12 @@ class Orders
     private $totalOrder;
 
     /**
+     * One order has many orderDetail. This is the inverse side.
+     * @ORM\OneToMany(targetEntity="OrderDetails", mappedBy="order")
+     */
+    private $orderDetails;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="date_add", type="datetime")
@@ -93,7 +93,7 @@ class Orders
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -122,54 +122,6 @@ class Orders
     public function getRefrence()
     {
         return $this->refrence;
-    }
-
-    /**
-     * Set idUser
-     *
-     * @param integer $idUser
-     *
-     * @return Orders
-     */
-    public function setIdUser($idUser)
-    {
-        $this->idUser = $idUser;
-
-        return $this;
-    }
-
-    /**
-     * Get idUser
-     *
-     * @return int
-     */
-    public function getIdUser()
-    {
-        return $this->idUser;
-    }
-
-    /**
-     * Set idAddress
-     *
-     * @param integer $idAddress
-     *
-     * @return Orders
-     */
-    public function setIdAddress($idAddress)
-    {
-        $this->idAddress = $idAddress;
-
-        return $this;
-    }
-
-    /**
-     * Get idAddress
-     *
-     * @return int
-     */
-    public function getIdAddress()
-    {
-        return $this->idAddress;
     }
 
     /**
@@ -291,5 +243,86 @@ class Orders
     {
         return $this->dateUpd;
     }
-}
 
+    /**
+     * Set address
+     *
+     * @param \AddressBundle\Entity\Address $address
+     *
+     * @return Orders
+     */
+    public function setAddress(\AddressBundle\Entity\Address $address = null)
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    /**
+     * Get address
+     *
+     * @return \AddressBundle\Entity\Address
+     */
+    public function getAddress()
+    {
+        return $this->address;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \AppBundle\Entity\User $user
+     *
+     * @return Orders
+     */
+    public function setUser(\AppBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \AppBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Add orderDetail
+     *
+     * @param \AppBundle\Entity\OrderDetails $orderDetail
+     *
+     * @return Orders
+     */
+    public function addOrderDetail(\AppBundle\Entity\OrderDetails $orderDetail)
+    {
+        $this->orderDetails[] = $orderDetail;
+
+        return $this;
+    }
+
+    /**
+     * Remove orderDetail
+     *
+     * @param \AppBundle\Entity\OrderDetails $orderDetail
+     */
+    public function removeOrderDetail(\AppBundle\Entity\OrderDetails $orderDetail)
+    {
+        $this->orderDetails->removeElement($orderDetail);
+    }
+
+    /**
+     * Get orderDetails
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getOrderDetails()
+    {
+        return $this->orderDetails;
+    }
+}

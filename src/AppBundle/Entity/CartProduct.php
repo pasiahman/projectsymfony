@@ -56,63 +56,14 @@ class CartProduct
      */
     private $dateUpd;
 
-
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set idCart
-     *
-     * @param integer $idCart
-     *
-     * @return CartProduct
-     */
-    public function setIdCart($idCart)
-    {
-        $this->idCart = $idCart;
-
-        return $this;
-    }
-
-    /**
-     * Get idCart
-     *
-     * @return int
-     */
-    public function getIdCart()
-    {
-        return $this->idCart;
-    }
-
-    /**
-     * Set idProduct
-     *
-     * @param integer $idProduct
-     *
-     * @return CartProduct
-     */
-    public function setIdProduct($idProduct)
-    {
-        $this->idProduct = $idProduct;
-
-        return $this;
-    }
-
-    /**
-     * Get idProduct
-     *
-     * @return int
-     */
-    public function getIdProduct()
-    {
-        return $this->idProduct;
     }
 
     /**
@@ -132,7 +83,7 @@ class CartProduct
     /**
      * Get quantity
      *
-     * @return int
+     * @return integer
      */
     public function getQuantity()
     {

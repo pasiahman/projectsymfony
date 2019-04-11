@@ -15,15 +15,8 @@ class Address
 {
 
     public function __construct() {
-        $this->cart = new ArrayCollection();
         $this->order = new ArrayCollection();
     }
-    
-    /**
-     * One address has many cart. This is the inverse side.
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Cart", mappedBy="address")
-     */
-    private $cart;
 
     /**
      * One address has many order. This is the inverse side.
@@ -365,40 +358,6 @@ class Address
     public function getDateUpd()
     {
         return $this->dateUpd;
-    }
-
-    /**
-     * Add cart
-     *
-     * @param \AppBundle\Entity\Cart $cart
-     *
-     * @return Address
-     */
-    public function addCart(\AppBundle\Entity\Cart $cart)
-    {
-        $this->cart[] = $cart;
-
-        return $this;
-    }
-
-    /**
-     * Remove cart
-     *
-     * @param \AppBundle\Entity\Cart $cart
-     */
-    public function removeCart(\AppBundle\Entity\Cart $cart)
-    {
-        $this->cart->removeElement($cart);
-    }
-
-    /**
-     * Get cart
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getCart()
-    {
-        return $this->cart;
     }
 
     /**

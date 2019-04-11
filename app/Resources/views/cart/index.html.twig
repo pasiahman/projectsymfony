@@ -32,51 +32,56 @@
 		    </form>
 		  </tbody>
 		</table>
-		<table class="table">
-			<tr>
-				<td>
-					<h2>Address List</h2>
-					
-					{% if user.getAddress %}
-						<table>
-					   	{% for itemAddress in user.getAddress %}
-						    <tr>
-						      <td><input type="radio" name="address" value="{{ itemAddress.id }}"></td>
-						      <td>{{ itemAddress.getAlias }}</td>
-						      <td>{{ itemAddress.getNameAccount }}</td>
-						      <td>{{ itemAddress.getAddress }}</td>
-						      <td>{{ itemAddress.getPhone }}</td>
-						    </tr>
-					    {% endfor %}
-					    </table>
-					{% else %}
-					   Create address first
-					{% endif %}
-				</td>
-				<td style='text-align:right'>
-					<h2>Payment</h2>
-					<table class="table">
-						<tr>
-							<td>
-								<div class="form-group">
-								  <select class="form-control" id="sel1">
-								    <option value="">Select payment</option>
-								    <option value="transfer bank">Transfer Bank</option>
-								    <option value="cod">COD</option>
-								  </select>
-								</div>
-							</td>
-						</tr>
-					</table>
-				</td>
-			</tr>
-		</table>
-		<table class="table">
-			<tr>
-				<td><a href="{{ continue_link }}" class="btn btn-info" role="button">Lanjut Belanja</a></td>
-				<td style='text-align:right'><a href="#" class="btn btn-primary" role="button">Place Order</a></td>
-			</tr>
-		</table>
+		<form method="post" action="{{ order_link }}">
+			<table class="table">
+				<tr>
+					<td>
+						<h2>Address List</h2>
+						
+						{% if user.getAddress %}
+							<table>
+						   	{% for itemAddress in user.getAddress %}
+							    <tr>
+							      <td><input type="radio" name="address_id" value="{{ itemAddress.id }}"></td>
+							      <td>{{ itemAddress.getAlias }}</td>
+							      <td>{{ itemAddress.getNameAccount }}</td>
+							      <td>{{ itemAddress.getAddress }}</td>
+							      <td>{{ itemAddress.getPhone }}</td>
+							    </tr>
+						    {% endfor %}
+						    </table>
+						{% else %}
+						   Create address first
+						{% endif %}
+					</td>
+					<td style='text-align:right'>
+						<h2>Payment</h2>
+						<table class="table">
+							<tr>
+								<td>
+									<div class="form-group">
+									  <select class="form-control" name="payment">
+									    <option value="">Select payment</option>
+									    <option value="transfer bank">Transfer Bank</option>
+									    <option value="cod">COD</option>
+									  </select>
+									</div>
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+			<table class="table">
+				<tr>
+					<td>
+						<a href="{{ continue_link }}" class="btn btn-info" role="button">Lanjut Belanja</a></td>
+					<td style='text-align:right'>
+						<input type="submit" class="btn btn-primary" name="place_order" value="Place Order">
+					</td>
+				</tr>
+			</table>
+		</form>
 	</div>
 {% endblock %}
 

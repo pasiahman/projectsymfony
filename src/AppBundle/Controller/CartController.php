@@ -28,10 +28,12 @@ class CartController extends Controller
 
         $cart = $this->getDoctrine()->getRepository(Cart::class)->findOneBy(['user' => $user, 'isOrdered' => false]);
         $continue_link = $this->generateUrl('homepage');
+        $order_link = $this->generateUrl('order_add');
 
         return $this->render('cart/index.html.twig', array(
             'cart' => $cart,
             'continue_link' => $continue_link,
+            'order_link' => $order_link,
             'user' => $user,
         ));
     }
@@ -46,40 +48,56 @@ class CartController extends Controller
         if (!$user instanceof User) {
             return $this->redirectToRoute('fos_user_security_login');
         }
+
+        // existing cart
+        $cart = $this->getDoctrine()->getRepository(Cart::class)->findOneBy(['user' => $user, 'isOrdered' => false]);
         
-        $quantity = $request->get("quantity");
+        $qty = $request->get("quantity");
         $product_id = $request->get("product_id");
 
         $repository = $this->getDoctrine()->getRepository(Products::class);
         $product = $repository->find($product_id);
-        
-        $cart = new Cart();
-        $cart->setUser($user);
-        $cart->setIsOrdered(0);
-        $cart->setDateAdd(new \DateTime());
-        $cart->setDateUpd(new \DateTime());
-
-        // $cart->getCartProduct()->add($cartProduct);
-
-        // $this->getDoctrine()->persist($cart);
-        // $this->getDoctrine()->flush();
 
         $em = $this->getDoctrine()->getManager();
-        $em->persist($cart);
-        // $em->flush();
+        
+        if($cart){
+            $cart->setDateUpd(new \DateTime());
 
-        $cartProduct = new CartProduct();
-        $cartProduct->setProduct($product);
-        $cartProduct->setQuantity($quantity);
-        $cartProduct->setCart($cart);
-        $cartProduct->setDateAdd(new \DateTime());
-        $cartProduct->setDateUpd(new \DateTime());
+            $cartProduct = $this->getDoctrine()->getRepository(CartProduct::class)->findOneBy(['product' => $product, 'cart' => $cart]);
+            if($cartProduct){
+                $quantity = $cartProduct->getQuantity();
+                $quantity = $quantity+$qty;
+                $cartProduct->setQuantity($quantity);
+                $em->flush();
+            } else {
+                $cartProduct = new CartProduct();
+                $cartProduct->setProduct($product);
+                $cartProduct->setQuantity($qty);
+                $cartProduct->setCart($cart);
+                $cartProduct->setDateAdd(new \DateTime());
+                $cartProduct->setDateUpd(new \DateTime());
+                $em->persist($cartProduct);
+                $em->flush();
+            }
+        } else {
+            $cart = new Cart();
+            $cart->setUser($user);
+            $cart->setIsOrdered(0);
+            $cart->setDateAdd(new \DateTime());
+            $cart->setDateUpd(new \DateTime());
 
-        // $em = $this->getDoctrine()->getManager();
-        $em->persist($cartProduct);
-        $em->flush();
+            $cartProduct = new CartProduct();
+            $cartProduct->setProduct($product);
+            $cartProduct->setQuantity($qty);
+            $cartProduct->setCart($cart);
+            $cartProduct->setDateAdd(new \DateTime());
+            $cartProduct->setDateUpd(new \DateTime());
 
-        // return $this->view($this->get('otten.factory.cart_view')->createCartView($cart), 200);
+            $em->persist($cart);
+            $em->persist($cartProduct);
+            $em->flush();
+        }
+        
         return $this->redirectToRoute('cart_index');
     }
 }

@@ -28,13 +28,6 @@ class Cart
     private $id;
 
     /**
-     * Many cart have one address. This is the owning side.
-     * @ORM\ManyToOne(targetEntity="AddressBundle\Entity\Address", inversedBy="cart")
-     * @ORM\JoinColumn(name="address_id", referencedColumnName="id")
-     */
-    private $address;
-
-    /**
      * Many cart have one user. This is the owning side.
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="cart")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
@@ -68,63 +61,14 @@ class Cart
      */
     private $dateUpd;
 
-
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set idAddress
-     *
-     * @param integer $idAddress
-     *
-     * @return Cart
-     */
-    public function setIdAddress($idAddress)
-    {
-        $this->idAddress = $idAddress;
-
-        return $this;
-    }
-
-    /**
-     * Get idAddress
-     *
-     * @return int
-     */
-    public function getIdAddress()
-    {
-        return $this->idAddress;
-    }
-
-    /**
-     * Set idUser
-     *
-     * @param integer $idUser
-     *
-     * @return Cart
-     */
-    public function setIdUser($idUser)
-    {
-        $this->idUser = $idUser;
-
-        return $this;
-    }
-
-    /**
-     * Get idUser
-     *
-     * @return int
-     */
-    public function getIdUser()
-    {
-        return $this->idUser;
     }
 
     /**
@@ -144,7 +88,7 @@ class Cart
     /**
      * Get isOrdered
      *
-     * @return bool
+     * @return boolean
      */
     public function getIsOrdered()
     {
@@ -200,30 +144,6 @@ class Cart
     }
 
     /**
-     * Set address
-     *
-     * @param \AddressBundle\Entity\Address $address
-     *
-     * @return Cart
-     */
-    public function setAddress(\AddressBundle\Entity\Address $address = null)
-    {
-        $this->address = $address;
-
-        return $this;
-    }
-
-    /**
-     * Get address
-     *
-     * @return \AddressBundle\Entity\Address
-     */
-    public function getAddress()
-    {
-        return $this->address;
-    }
-
-    /**
      * Set user
      *
      * @param \AppBundle\Entity\User $user
@@ -245,11 +165,6 @@ class Cart
     public function getUser()
     {
         return $this->user;
-    }
-
-    public function getCartProduct()
-    {
-        return $this->cartProduct;
     }
 
     /**
@@ -274,5 +189,15 @@ class Cart
     public function removeCartProduct(\AppBundle\Entity\CartProduct $cartProduct)
     {
         $this->cartProduct->removeElement($cartProduct);
+    }
+
+    /**
+     * Get cartProduct
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCartProduct()
+    {
+        return $this->cartProduct;
     }
 }

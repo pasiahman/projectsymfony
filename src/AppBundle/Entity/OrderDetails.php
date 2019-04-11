@@ -77,63 +77,14 @@ class OrderDetails
      */
     private $dateUpd;
 
-
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set idOrder
-     *
-     * @param integer $idOrder
-     *
-     * @return OrderDetails
-     */
-    public function setIdOrder($idOrder)
-    {
-        $this->idOrder = $idOrder;
-
-        return $this;
-    }
-
-    /**
-     * Get idOrder
-     *
-     * @return int
-     */
-    public function getIdOrder()
-    {
-        return $this->idOrder;
-    }
-
-    /**
-     * Set idProduct
-     *
-     * @param integer $idProduct
-     *
-     * @return OrderDetails
-     */
-    public function setIdProduct($idProduct)
-    {
-        $this->idProduct = $idProduct;
-
-        return $this;
-    }
-
-    /**
-     * Get idProduct
-     *
-     * @return int
-     */
-    public function getIdProduct()
-    {
-        return $this->idProduct;
     }
 
     /**
@@ -177,7 +128,7 @@ class OrderDetails
     /**
      * Get quantity
      *
-     * @return int
+     * @return integer
      */
     public function getQuantity()
     {
@@ -201,7 +152,7 @@ class OrderDetails
     /**
      * Get price
      *
-     * @return int
+     * @return integer
      */
     public function getPrice()
     {
@@ -225,7 +176,7 @@ class OrderDetails
     /**
      * Get subtotal
      *
-     * @return int
+     * @return integer
      */
     public function getSubtotal()
     {
@@ -279,5 +230,52 @@ class OrderDetails
     {
         return $this->dateUpd;
     }
-}
 
+    /**
+     * Set order
+     *
+     * @param \AppBundle\Entity\Orders $order
+     *
+     * @return OrderDetails
+     */
+    public function setOrder(\AppBundle\Entity\Orders $order = null)
+    {
+        $this->order = $order;
+
+        return $this;
+    }
+
+    /**
+     * Get order
+     *
+     * @return \AppBundle\Entity\Orders
+     */
+    public function getOrder()
+    {
+        return $this->order;
+    }
+
+    /**
+     * Set product
+     *
+     * @param \ProductBundle\Entity\Products $product
+     *
+     * @return OrderDetails
+     */
+    public function setProduct(\ProductBundle\Entity\Products $product = null)
+    {
+        $this->product = $product;
+
+        return $this;
+    }
+
+    /**
+     * Get product
+     *
+     * @return \ProductBundle\Entity\Products
+     */
+    public function getProduct()
+    {
+        return $this->product;
+    }
+}
